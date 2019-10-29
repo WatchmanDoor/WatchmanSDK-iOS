@@ -28,10 +28,10 @@ end
 ## Installation
 To be able to use WatchmanSDK in your iOS project follow this steps:
 1. Download the content of this repository and copy into your project directory:
-    1. WatchmanSDK
-    1. WDCommon
-    1. WDNetwork
-    1. WDConnectivity
+    * WatchmanSDK
+    * WDCommon
+    * WDNetwork
+    * WDConnectivity
 1. Go to your project `Target > General > Embedded Binaries` and add them.
 > Make sure that the recently frameworks appears into Linked Frameworks and Libraries
 
