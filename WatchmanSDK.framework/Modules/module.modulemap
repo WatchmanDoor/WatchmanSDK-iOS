@@ -1,0 +1,11 @@
+framework module WatchmanSDK {
+  umbrella header "WatchmanSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module WatchmanSDK.Swift {
+    header "WatchmanSDK-Swift.h"
+    requires objc
+}

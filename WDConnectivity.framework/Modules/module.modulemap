@@ -1,0 +1,11 @@
+framework module WDConnectivity {
+  umbrella header "WDConnectivity.h"
+
+  export *
+  module * { export * }
+}
+
+module WDConnectivity.Swift {
+    header "WDConnectivity-Swift.h"
+    requires objc
+}

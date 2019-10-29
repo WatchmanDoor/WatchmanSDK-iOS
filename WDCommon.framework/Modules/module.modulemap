@@ -1,0 +1,11 @@
+framework module WDCommon {
+  umbrella header "WDCommon.h"
+
+  export *
+  module * { export * }
+}
+
+module WDCommon.Swift {
+    header "WDCommon-Swift.h"
+    requires objc
+}

@@ -1,0 +1,11 @@
+framework module WDNetwork {
+  umbrella header "WDNetwork.h"
+
+  export *
+  module * { export * }
+}
+
+module WDNetwork.Swift {
+    header "WDNetwork-Swift.h"
+    requires objc
+}
