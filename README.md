@@ -33,7 +33,7 @@ To be able to use WatchmanSDK in your iOS project follow this steps:
     * WDNetwork
     * WDConnectivity
 1. Go to your project `Target > General > Embedded Binaries` and add them.
-> Make sure that the recently frameworks appears into Linked Frameworks and Libraries
+> Make sure that the recently added frameworks appear into `Linked Frameworks and Libraries`
 
 ### Importing
 ```swift
