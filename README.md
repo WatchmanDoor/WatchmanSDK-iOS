@@ -8,7 +8,7 @@ WatchmanSDK for iOS helps developers to integrate our products in their own syst
 
 ### Requiered CocoaPods
 
-```
+```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '11.0'
 use_frameworks!
