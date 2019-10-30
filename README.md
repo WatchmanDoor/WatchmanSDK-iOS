@@ -25,6 +25,7 @@ target 'Example' do
     
 end
 ```
+
 ## Installation
 To be able to use WatchmanSDK in your iOS project follow this steps:
 1. Download the content of this repository and copy into your project directory:
@@ -38,4 +39,40 @@ To be able to use WatchmanSDK in your iOS project follow this steps:
 ### Importing
 ```swift
 import WatchmanSDK
+```
+
+## Usage
+### Typical use: Instantiate the desired WDManager and implement their delegates
+```swift
+import WatchmanSDK
+
+class ViewController: UIViewController {
+
+    var loginManager: WDLoginManager? = nil
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loginManager = WDLoginManager(delegate: self)
+        loginManager?.doLogin(withEmail: "mail@mail.com", andPassword: "Password")
+    }
+    
+    ...
+
+}
+
+extension ViewController: WDLoginDelegate {
+
+    func WDLoginResponse(loginOK: Bool, error: Int?) {
+        if(loginOK){
+            addLog(message:"LOGIN OK!")
+        }else{
+            addLog(message:"LOGIN KO!: \(error!)")
+        }
+    }
+
+    func WDUserClosedSession() {
+        addLog(message:"THE USER HAS LOGGED OUT!")
+    }
+}
 ```
