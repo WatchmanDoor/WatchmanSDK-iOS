@@ -64,10 +64,10 @@ class ViewController: UIViewController {
 extension ViewController: WDLoginDelegate {
 
     func WDLoginResponse(loginOK: Bool, error: Int?) {
-        if(loginOK){
+        if loginOK {
             addLog(message:"LOGIN OK!")
-        }else{
-            addLog(message:"LOGIN KO!: \(error!)")
+        } else {
+            addLog(message:"LOGIN KO!: \(error ?? 500)")
         }
     }
 
