@@ -2,8 +2,8 @@
 WatchmanSDK for iOS helps developers to integrate our products into their own systems. Developed by a core team of engineers at Watchman Door, these components enable a reliable development workflow.
 
 ## Requirements
-* XCode 10 or higher
-* Swift 5 or higher
+* XCode 11 or higher
+* Swift 5.1 or higher
 * Minimum iOS deployment target of 11.0 or higher
 
 ### Requiered CocoaPods
