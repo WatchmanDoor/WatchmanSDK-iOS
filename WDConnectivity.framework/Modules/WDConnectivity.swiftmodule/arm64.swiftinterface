@@ -1,0 +1,238 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name WDConnectivity
+import CoreBluetooth.CBCharacteristic
+import CoreBluetooth.CBPeripheral
+import CoreBluetooth
+import Foundation
+import RxCocoa
+import RxSwift
+import Swift
+import UIKit
+import WDCommon
+@_exported import WDConnectivity
+import WDNetwork
+public class ConnectionErrorModel {
+  public var error: Swift.Error?
+  public var nearPeripheral: CoreBluetooth.CBPeripheral?
+  public init(error: Swift.Error?, nearPeripheral: CoreBluetooth.CBPeripheral?)
+  @objc deinit
+}
+public class WDMot2 : WDConnectivity.WDDevice {
+  override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
+  override public func onChallengeEnd(callback: @escaping () -> ())
+  override public func setConfiguration(newConfiguration: WDCommon.DeviceConfiguration) -> RxSwift.Observable<Swift.Void>
+  @objc deinit
+}
+extension CBPeripheral {
+  public func check(withMac: Swift.String) -> Swift.Bool
+}
+public class WDKnob : WDConnectivity.BleDevice {
+  override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
+  override public func initObservers()
+  override public func initGattServices(characteristics: [CoreBluetooth.CBCharacteristic]) -> Swift.Bool
+  override public func checkGattServices() -> Swift.Bool
+  override public func getGattKey(uuid: CoreBluetooth.CBUUID) -> Swift.String
+  override public func enableNotifications()
+  override public func setConfiguration(newConfiguration: WDCommon.DeviceConfiguration) -> RxSwift.Observable<Swift.Void>
+  override public func unlock() -> RxSwift.Observable<Swift.Void>
+  override public func disconnect()
+  override public func open() -> RxSwift.Observable<Swift.Void>
+  override public func close() -> RxSwift.Observable<Swift.Void>
+  public func calibrate() -> RxSwift.Observable<Swift.Void>
+  @objc deinit
+}
+public class WDEco : WDConnectivity.WDDevice {
+  override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
+  override public func onChallengeEnd(callback: @escaping () -> ())
+  override public func checkConfiguration(char: Swift.String, callback: @escaping () -> ())
+  override public func setConfiguration(newConfiguration: WDCommon.DeviceConfiguration) -> RxSwift.Observable<Swift.Void>
+  override public func updateConfiguration(char: Swift.String, newConfiguration: WDCommon.DeviceConfiguration) -> RxSwift.Observable<Swift.Void>
+  @objc deinit
+}
+public class ConnectivityViewModel : WDCommon.ViewModelProtocol {
+  public struct Input {
+    public let wdProduct: RxSwift.AnyObserver<WDCommon.WDProduct>
+    public let startConnection: RxSwift.AnyObserver<Swift.Void>
+    public let disconnectAction: RxSwift.AnyObserver<Swift.Void>
+    public let updateConfigurationAction: RxSwift.AnyObserver<WDCommon.DeviceConfiguration>
+    public let openAction: RxSwift.AnyObserver<Swift.Void>
+    public let closeAction: RxSwift.AnyObserver<Swift.Void>
+    public let stopAction: RxSwift.AnyObserver<Swift.Void>
+    public let checkModule: RxSwift.AnyObserver<Swift.Void>
+    public let readICCID: RxSwift.AnyObserver<Swift.Void>
+    public let dfuMode: RxSwift.AnyObserver<Swift.Void>
+    public let readAdvertising: RxSwift.AnyObserver<Swift.Void>
+    public let writeAdvertising: RxSwift.AnyObserver<Swift.Int>
+    public let calibrateAction: RxSwift.AnyObserver<Swift.Void>
+    public let readCoverage: RxSwift.AnyObserver<Swift.Void>
+  }
+  public struct Output {
+    public let onLoadingObservable: RxSwift.Observable<Swift.Bool>
+    public let onConnectedObservable: RxSwift.Observable<Swift.Void>
+    public let onConnectionErrorObservable: RxSwift.Observable<WDConnectivity.ConnectionErrorModel>
+    public let onDisconnectedObservable: RxSwift.Observable<Swift.Void>
+    public let onBluetoothStateObservable: RxSwift.Observable<CoreBluetooth.CBManagerState>
+    public let onDoorStateReceivedObservable: RxSwift.Observable<Swift.Int>
+    public let onDoorStateChangedReceivedObservable: RxSwift.Observable<Swift.Int>
+    public let onExtendedDoorStateReceivedObservable: RxSwift.Observable<Swift.Int>
+    public let onExtendedDoorStateChangedReceivedObservable: RxSwift.Observable<Swift.Int>
+    public let onBatteryReceivedObservable: RxSwift.Observable<Swift.Int>
+    public let onOpenActionDoneObservable: RxSwift.Observable<Swift.Void>
+    public let onCloseActionDoneObservable: RxSwift.Observable<Swift.Void>
+    public let onStopActionDoneObservable: RxSwift.Observable<Swift.Void>
+    public let onActionDoneErrorObservable: RxSwift.Observable<Swift.Error>
+    public let onUpdateConfigurationDoneObservable: RxSwift.Observable<Swift.Void>
+    public let onUpdateConfigurationErrorObservable: RxSwift.Observable<Swift.Error>
+    public let onActionStatusObservable: RxSwift.Observable<Swift.Int>
+    public let onAlarmStatusObservable: RxSwift.Observable<Swift.Int>
+    public let onNewConfigurationObservable: RxSwift.Observable<Swift.String>
+    public let onCheckModuleDone: RxSwift.Observable<Swift.Int>
+    public let onReadICCIDDone: RxSwift.Observable<Swift.String?>
+    public let onReadAdvertisingDone: RxSwift.Observable<Swift.Int?>
+    public let onWriteAdvertisingDone: RxSwift.Observable<Swift.Void>
+    public let onWriteAdvertisingError: RxSwift.Observable<Swift.Error>
+    public let onCalibrateActionError: RxSwift.Observable<Swift.Error>
+    public let onReadCoverageDone: RxSwift.Observable<Swift.Int?>
+    public let onReadCoverageError: RxSwift.Observable<Swift.Error>
+  }
+  public var input: WDConnectivity.ConnectivityViewModel.Input
+  public var output: WDConnectivity.ConnectivityViewModel.Output
+  public var bleDevice: WDConnectivity.BleDevice?
+  public init(apiClient: WDNetwork.Client)
+  public func initBleDevice(wdProduct: WDCommon.WDProduct)
+  @objc deinit
+}
+public enum LOCK_STATE : Swift.Int {
+  case LOCK
+  case UNLOCK
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum ACTION : Swift.Int32 {
+  case NONE
+  case CLOSE
+  case OPEN
+  case STOP
+  public typealias RawValue = Swift.Int32
+  public init?(rawValue: Swift.Int32)
+  public var rawValue: Swift.Int32 {
+    get
+  }
+}
+public enum CHAR : Swift.Int {
+  case STATUS
+  case OPEN_DOOR
+  case PUBLIC_KEY
+  case HASH
+  case LOCK_STATE
+  case RELAY
+  case SETTINGS
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public class WDGravity : WDConnectivity.WDModuleDevice {
+  final public let onExtendedDoorStateSubject: RxSwift.PublishSubject<Swift.Int>
+  final public let onExtendedDoorStateChangedSubject: RxSwift.PublishSubject<Swift.Int>
+  final public let onActionStatusSubject: RxSwift.PublishSubject<Swift.Int>
+  final public let onAlarmStatusSubject: RxSwift.PublishSubject<Swift.Int>
+  override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
+  override public func initObservers()
+  override public func enableNotifications()
+  override public func onChallengeEnd(callback: @escaping () -> ())
+  override public func setConfiguration(newConfiguration: WDCommon.DeviceConfiguration) -> RxSwift.Observable<Swift.Void>
+  override public func stop() -> RxSwift.Observable<Swift.Void>
+  override public func dfuMode() -> RxSwift.Observable<Swift.Void>
+  override public func checkModule() -> RxSwift.Observable<Swift.Int>
+  override public func readICCID() -> RxSwift.Observable<Swift.String?>
+  override public func getICCID(iccidChar: Swift.String) -> RxSwift.Observable<Swift.String?>
+  @objc deinit
+}
+open class BleDevice {
+  final public let DOOR_STATE_INDET: Swift.Int
+  final public let DOOR_STATE_CLOSE: Swift.Int
+  final public let DOOR_STATE_OPEN: Swift.Int
+  final public let DOOR_STATE_FORCED: Swift.Int
+  final public let CLOSE_ACTION_VALUE: Swift.String
+  final public let OPEN_ACTION_VALUE: Swift.String
+  final public let STOP_ALARM_ACTION_VALUE: Swift.String
+  final public let STOP_ACTION_VALUE: Swift.String
+  final public let disposeBag: RxSwift.DisposeBag
+  public var allowOpen: Swift.Bool
+  public var allowClose: Swift.Bool
+  public var allowStop: Swift.Bool
+  final public let onDoorStateSubject: RxSwift.PublishSubject<Swift.Int>
+  final public let onDoorStateChangedSubject: RxSwift.PublishSubject<Swift.Int>
+  final public let onBatteryLevelSubject: RxSwift.PublishSubject<Swift.Int>
+  final public let onNewConfigurationSubject: RxSwift.PublishSubject<Swift.String>
+  public var apiClient: WDNetwork.Client?
+  public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client? = nil)
+  open func initObservers()
+  open func initGattServices(characteristics: [CoreBluetooth.CBCharacteristic]) -> Swift.Bool
+  open func getGattKey(uuid: CoreBluetooth.CBUUID) -> Swift.String
+  open func checkGattServices() -> Swift.Bool
+  public func sendBattery(battery: Swift.Int)
+  public func sendConfiguration()
+  open func setConfiguration(newConfiguration: WDCommon.DeviceConfiguration) -> RxSwift.Observable<Swift.Void>
+  open func unlock() -> RxSwift.Observable<Swift.Void>
+  open func disconnect()
+  open func open() -> RxSwift.Observable<Swift.Void>
+  open func close() -> RxSwift.Observable<Swift.Void>
+  open func stop() -> RxSwift.Observable<Swift.Void>
+  open func dfuMode() -> RxSwift.Observable<Swift.Void>
+  open func readAdvertising() -> RxSwift.Observable<Swift.Int?>
+  open func writeAdvertising(newAdvertising: Swift.Int) -> RxSwift.Observable<Swift.Void>
+  open func readCoverage(onFinish: @escaping (Swift.Int?, Swift.Error?) -> Swift.Void)
+  open func enableNotifications()
+  @objc deinit
+}
+public class WDModuleDevice : WDConnectivity.WDDevice {
+  public static var MODULE_STATUS_NONE: Swift.Int
+  public static var MODULE_STATUS_GPRS: Swift.Int
+  public static var MODULE_STATUS_NBIOT: Swift.Int
+  public static var MODULE_STATUS_NOT_CHECKED: Swift.Int
+  open func checkModule() -> RxSwift.Observable<Swift.Int>
+  open func readICCID() -> RxSwift.Observable<Swift.String?>
+  open func getICCID(iccidChar: Swift.String) -> RxSwift.Observable<Swift.String?>
+  override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
+  @objc deinit
+}
+public class WDMot : WDConnectivity.WDDevice {
+  override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
+  override public func onChallengeEnd(callback: @escaping () -> ())
+  override public func setConfiguration(newConfiguration: WDCommon.DeviceConfiguration) -> RxSwift.Observable<Swift.Void>
+  @objc deinit
+}
+public class ConnectivityService {
+  public func sendCoverage(productId: Swift.Int, coverage: Swift.Int, onFinish: @escaping (Swift.Error?) -> ())
+  @objc deinit
+}
+public class WDDevice : WDConnectivity.BleDevice {
+  override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
+  override public func initObservers()
+  override public func initGattServices(characteristics: [CoreBluetooth.CBCharacteristic]) -> Swift.Bool
+  override public func checkGattServices() -> Swift.Bool
+  override public func getGattKey(uuid: CoreBluetooth.CBUUID) -> Swift.String
+  override public func enableNotifications()
+  override public func unlock() -> RxSwift.Observable<Swift.Void>
+  override public func open() -> RxSwift.Observable<Swift.Void>
+  override public func close() -> RxSwift.Observable<Swift.Void>
+  override public func stop() -> RxSwift.Observable<Swift.Void>
+  open func onChallengeEnd(callback: @escaping () -> ())
+  open func checkConfiguration(char: Swift.String, callback: @escaping () -> ())
+  open func updateConfiguration(char: Swift.String, newConfiguration: WDCommon.DeviceConfiguration) -> RxSwift.Observable<Swift.Void>
+  override public func readAdvertising() -> RxSwift.Observable<Swift.Int?>
+  override public func writeAdvertising(newAdvertising: Swift.Int) -> RxSwift.Observable<Swift.Void>
+  override public func readCoverage(onFinish: @escaping (Swift.Int?, Swift.Error?) -> Swift.Void)
+  public func performAction(value: Foundation.Data) -> RxSwift.Observable<Swift.Void>
+  @objc deinit
+}
+open class Encryption {
+  @objc deinit
+}

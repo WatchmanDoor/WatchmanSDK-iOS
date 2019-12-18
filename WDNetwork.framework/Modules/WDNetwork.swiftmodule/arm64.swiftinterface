@@ -1,0 +1,113 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name WDNetwork
+import Foundation
+import RxCocoa
+import RxSwift
+import Swift
+import WDCommon
+@_exported import WDNetwork
+public class TokenService {
+  public init()
+  @objc deinit
+}
+public class DefaultResponseError : Swift.Decodable {
+  public var code: Swift.Int?
+  public var msg: Swift.String?
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+}
+public class Token : WDNetwork.ResponseProtocol, Swift.Decodable {
+  public var token_type: Swift.String?
+  public var access_token: Swift.String?
+  public var expires_in: Swift.Int?
+  public var refresh_token: Swift.String?
+  public var error: Swift.String?
+  public var message: Swift.String?
+  public init(access_token: Swift.String?, expires_in: Swift.Int?, refresh_token: Swift.String?)
+  public func getResponseCode() -> Swift.Int
+  public func isExpired(expirationDate: Foundation.Date?) -> Swift.Bool
+  public func hasValues() -> Swift.Bool
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+}
+public protocol ResponseProtocol {
+  func getResponseCode() -> Swift.Int
+}
+open class DefaultResponse : WDNetwork.ResponseProtocol, Swift.Decodable {
+  public init()
+  public func getResponseCode() -> Swift.Int
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+public enum HTTP_METHOD : Swift.String {
+  case GET
+  case POST
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum REQUEST_TYPE {
+  case OPEN
+  case OAUTH
+  case TOKEN
+  public static func == (a: WDNetwork.REQUEST_TYPE, b: WDNetwork.REQUEST_TYPE) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public protocol RequestProtocol {
+  associatedtype Response : Swift.Decodable
+  var method: WDNetwork.HTTP_METHOD { get }
+  var endpoint: Swift.String { get }
+  var body: [Swift.String : Any] { get set }
+  var type: WDNetwork.REQUEST_TYPE { get }
+}
+extension RequestProtocol {
+  public func getURLRequest() -> Foundation.URLRequest?
+  public func interceptorRequest(urlString: Swift.String) -> Foundation.URLRequest?
+}
+final public class ClientConfiguration {
+  public static var BASE_URL: Swift.String
+  public static var OAUTH_URL: Swift.String
+  public static var OAUTH_BASIC: Swift.Bool
+  public static var API_URL: Swift.String
+  public static var CLIENT_ID: Swift.Int
+  public static var CLIENT_SECRET: Swift.String
+  public static var WITH_INTERCEPTOR: Swift.Bool
+  @objc deinit
+}
+final public class TokenViewModel : WDCommon.ViewModelProtocol {
+  public struct Input {
+    public let startObserving: RxSwift.AnyObserver<Swift.Void>
+    public let closeSession: RxSwift.AnyObserver<Swift.Void>
+  }
+  public struct Output {
+    public let tokenResultObservable: RxSwift.Observable<WDNetwork.Token?>
+    public let tokenErrorObservable: RxSwift.Observable<Swift.Error>
+    public let onCloseSessionDone: RxSwift.Observable<Swift.Void>
+  }
+  final public var input: WDNetwork.TokenViewModel.Input
+  final public let output: WDNetwork.TokenViewModel.Output
+  final public var service: WDNetwork.TokenService
+  final public var userDefaults: Foundation.UserDefaults
+  public init()
+  final public func setCredentials(credentials: WDNetwork.Credential? = nil)
+  @objc deinit
+}
+public class RequestManager {
+  public init()
+  @objc deinit
+}
+public struct Credential {
+  public init(username: Swift.String, password: Swift.String)
+}
+public class Client {
+  public var userDefaults: Foundation.UserDefaults
+  public init()
+  public func send<R>(request: R) -> RxSwift.Observable<R.Response> where R : WDNetwork.RequestProtocol
+  @objc deinit
+}

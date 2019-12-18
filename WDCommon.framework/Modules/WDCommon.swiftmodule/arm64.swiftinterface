@@ -1,0 +1,318 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name WDCommon
+import Foundation
+import Swift
+@_exported import WDCommon
+open class WKnobConfiguration : WDCommon.DeviceConfiguration {
+  public var isBuzzerOn: Swift.Bool
+  public var isNightModeOn: Swift.Bool
+  public var isSemiAutomaticModeOn: Swift.Bool
+  public var isMotorwayCCW: Swift.Bool
+  public var autoDisconnectionTime: Swift.Int32
+  public var latchHoldTime: Swift.Int32
+  public var secret: Swift.String
+  public var deviceId: Swift.String
+  public var deviceKey: Swift.String
+  public var counter: Swift.Int64
+  public var lockOneRound: Swift.Bool
+  override public init()
+  public init(isBuzzerOn: Swift.Bool, isNightModeOn: Swift.Bool, isSemiAutomaticModeOn: Swift.Bool, isMotorwayCCW: Swift.Bool, autoDisconnectionTime: Swift.Int32, latchHoldTime: Swift.Int32, secret: Swift.String, deviceId: Swift.String, deviceKey: Swift.String, counter: Swift.Int64, lockOneRound: Swift.Bool)
+  override required public init(json: Swift.String)
+  override public init(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  required public init(from decoder: Swift.Decoder) throws
+  override public func toString() -> Swift.String
+  override open func copy(newConfiguration: WDCommon.DeviceConfiguration)
+  @objc deinit
+}
+extension String {
+  public func toBase64() -> Swift.String
+}
+public protocol JSONType : Swift.Decodable {
+  var jsonValue: Any { get }
+}
+extension Int : WDCommon.JSONType {
+  public var jsonValue: Any {
+    get
+  }
+}
+extension Int64 : WDCommon.JSONType {
+  public var jsonValue: Any {
+    get
+  }
+}
+extension Int32 : WDCommon.JSONType {
+  public var jsonValue: Any {
+    get
+  }
+}
+extension Int8 : WDCommon.JSONType {
+  public var jsonValue: Any {
+    get
+  }
+}
+extension String : WDCommon.JSONType {
+  public var jsonValue: Any {
+    get
+  }
+}
+extension Double : WDCommon.JSONType {
+  public var jsonValue: Any {
+    get
+  }
+}
+extension Bool : WDCommon.JSONType {
+  public var jsonValue: Any {
+    get
+  }
+}
+public struct AnyJSONType : WDCommon.JSONType {
+  public let jsonValue: Any
+  public init(from decoder: Swift.Decoder) throws
+}
+open class WMot2Configuration : WDCommon.WDConfiguration {
+  public var relays: [Swift.Int8]
+  public var enabledRelays: [Swift.Bool]
+  public var module: Swift.Bool
+  public var digitalInput: Swift.Bool
+  public var vibrationTime: Swift.Int8
+  public var vibrationNum: Swift.Int8
+  public var vibrationSensitive: Swift.Int8
+  public var motor: Swift.Bool
+  public var motorForward: Swift.Bool
+  public var motorForwardTime: Swift.Int
+  public var motorReverse: Swift.Bool
+  public var motorReverseTime: Swift.Int
+  public var powerMode: Swift.Int8
+  override public init()
+  public init(relays: [Swift.Int8], enabledRelays: [Swift.Bool], module: Swift.Bool, digitalInput: Swift.Bool, vibrationTime: Swift.Int8, vibrationNum: Swift.Int8, vibrationSensitive: Swift.Int8, motor: Swift.Bool, motorForward: Swift.Bool, motorForwardTime: Swift.Int, motorReverse: Swift.Bool, motorReverseTime: Swift.Int, powerMode: Swift.Int8)
+  public init(relays: [Swift.Int8], enabledRelays: [Swift.Bool], module: Swift.Bool, digitalInput: Swift.Bool, motor: Swift.Bool, motorForward: Swift.Bool, motorForwardTime: Swift.Int, motorReverse: Swift.Bool, motorReverseTime: Swift.Int, powerMode: Swift.Int8)
+  override required public init(json: Swift.String)
+  override required public init(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  required public init(from decoder: Swift.Decoder) throws
+  override open func copy(newConfiguration: WDCommon.DeviceConfiguration)
+  override open func updateFromData(data: Foundation.Data)
+  override open func toData() -> Foundation.Data
+  override public func toString() -> Swift.String
+  override open func initFormDict(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  override public init(data: Foundation.Data)
+  @objc deinit
+}
+open class WEcoConfiguration : WDCommon.WDConfiguration {
+  public enum WECO_SETTINGS : Swift.String {
+    case BUTTON_PERIOD
+    case PRODUCT_TYPE
+    public typealias RawValue = Swift.String
+    public init?(rawValue: Swift.String)
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public enum WECO_PROD_TYPE : Swift.String {
+    case WDOOR_ECO
+    case WOKU
+    public typealias RawValue = Swift.String
+    public init?(rawValue: Swift.String)
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public var buttonPeriod: Swift.Int?
+  public var productType: WDCommon.WEcoConfiguration.WECO_PROD_TYPE
+  override public init()
+  public init(buttonPeriod: Swift.Int?, productType: WDCommon.WEcoConfiguration.WECO_PROD_TYPE)
+  override required public init(json: Swift.String)
+  override public init(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  required public init(from decoder: Swift.Decoder) throws
+  override open func copy(newConfiguration: WDCommon.DeviceConfiguration)
+  override open func updateFromData(data: Foundation.Data)
+  public func updateButtonPeriodFromData(buttonPeriodData: Foundation.Data)
+  public func updateProductTypeFromData(productTypeData: Foundation.Data)
+  override open func toData() -> Foundation.Data
+  public func buttonPeriodToData() -> Foundation.Data
+  public func productTypeToData() -> Foundation.Data
+  override public func toString() -> Swift.String
+  override open func initFormDict(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  override public init(data: Foundation.Data)
+  @objc deinit
+}
+public enum OAUTH_KEYS : Swift.String {
+  case ACCESS_TOKEN
+  case REFRESH_TOKEN
+  case EXPIRES_IN
+  case EXPIRES_IN_DATE
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+open class WDProduct : WDCommon.DeviceInfo {
+  public var id: Swift.Int {
+    get
+    set(newValue)
+  }
+  public var productTypeKey: Swift.String {
+    get
+    set(newValue)
+  }
+  public var productType: WDCommon.DEVICE_TYPE
+  override public init()
+  public init(productId: Swift.Int, productTypeKey: Swift.String, mac: Swift.String, assetId: Swift.Int?, configuration: WDCommon.DeviceConfiguration?, challengeSecret: Swift.String?, challengeSecret2: Swift.String?)
+  public init(productId: Swift.Int, productTypeKey: Swift.String, mac: Swift.String, assetId: Swift.Int?, configurationDict: [Swift.String : WDCommon.AnyJSONType]?, challengeSecret: Swift.String?, challengeSecret2: Swift.String?)
+  public func hasClose() -> Swift.Bool
+  public func hastStop() -> Swift.Bool
+  override public init(mac: Swift.String, assetId: Swift.Int?, configuration: WDCommon.DeviceConfiguration?, challengeSecret: Swift.String?, challengeSecret2: Swift.String?, productId: Swift.Int)
+  @objc deinit
+}
+open class WDConfiguration : WDCommon.DeviceConfiguration {
+  override public init()
+  override public init(json: Swift.String)
+  override public init(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  required public init(from decoder: Swift.Decoder) throws
+  public init(data: Foundation.Data)
+  open func initFormDict(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  open func updateFromData(data: Foundation.Data)
+  open func toData() -> Foundation.Data
+  @objc deinit
+}
+public enum CHAR_SETTINGS : Swift.String {
+  case AUTO_CLOSE
+  case LOCK_BOLT_AUTOMOVEMENTS
+  case MODULE_SWITCH
+  case ALARM_SWITCH
+  case VIB_TIME_CHECK
+  case VIB_NUM_MIN
+  case VIB_SENSITIVE_LEVEL
+  case LIGHT_THRESHOLD
+  case PRODUCT_TYPE
+  case AUTO_OPEN
+  case AUTO_CLOSE_LOW_BATTERY
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum PRODUCT_TYPE : Swift.String {
+  case LOCK
+  case BOLT
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum CHAR_SETTINGS_POS : Swift.Int {
+  case AUTO_CLOSE
+  case LOCK_BOLT_AUTOMOVEMENTS
+  case MODULE_SWITCH
+  case ALARM_SWITCH
+  case VIB_TIME_CHECK
+  case VIB_NUM_MIN
+  case VIB_SENSITIVE_LEVEL
+  case LIGHT_THRESHOLD
+  case PRODUCT_TYPE
+  case AUTO_OPEN
+  case AUTO_CLOSE_LOW_BATTERY
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+open class WGravityConfiguration : WDCommon.WDConfiguration {
+  public var autoClose: Swift.Bool
+  public var lockBoltAutomovements: Swift.Bool
+  public var moduleSwitch: Swift.Bool
+  public var alarmSwitch: Swift.Bool
+  public var vibTimeCheck: Swift.Int8
+  public var vibNumMin: Swift.Int8
+  public var vibSensitiveLevel: Swift.Int8
+  public var lightThreshold: Swift.Int
+  public var productType: WDCommon.PRODUCT_TYPE
+  public var autoOpen: Swift.Bool
+  public var autoCloseLowBattery: Swift.Bool
+  override public init()
+  public init(autoClose: Swift.Bool, lockBoltAutomovements: Swift.Bool, moduleSwitch: Swift.Bool, alarmSwitch: Swift.Bool, vibTimeCheck: Swift.Int8, vibNumMin: Swift.Int8, vibSensitiveLevel: Swift.Int8, lightThreshold: Swift.Int, productType: WDCommon.PRODUCT_TYPE, autoOpen: Swift.Bool, autoCloseLowBattery: Swift.Bool)
+  override required public init(json: Swift.String)
+  override public init(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  required public init(from decoder: Swift.Decoder) throws
+  override open func copy(newConfiguration: WDCommon.DeviceConfiguration)
+  override open func updateFromData(data: Foundation.Data)
+  override open func toData() -> Foundation.Data
+  override public func toString() -> Swift.String
+  override open func initFormDict(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  override public init(data: Foundation.Data)
+  @objc deinit
+}
+public enum RELAY_CONF : Swift.Int8 {
+  case ONE
+  case TWO
+  public typealias RawValue = Swift.Int8
+  public init?(rawValue: Swift.Int8)
+  public var rawValue: Swift.Int8 {
+    get
+  }
+}
+open class WMotConfiguration : WDCommon.WDConfiguration {
+  public var relayConfig: WDCommon.RELAY_CONF
+  public var seconds: [Swift.Int8]
+  public var actions: [Swift.String]
+  override public init()
+  public init(relayConfig: WDCommon.RELAY_CONF, seconds: [Swift.Int8] = [], actions: [Swift.String] = [])
+  override required public init(json: Swift.String)
+  override required public init(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  required public init(from decoder: Swift.Decoder) throws
+  override open func copy(newConfiguration: WDCommon.DeviceConfiguration)
+  override open func updateFromData(data: Foundation.Data)
+  override open func toData() -> Foundation.Data
+  override public func toString() -> Swift.String
+  override open func initFormDict(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  public func checkSettings() -> Swift.Bool
+  override public init(data: Foundation.Data)
+  @objc deinit
+}
+public enum DEVICE_TYPE : Swift.String {
+  case SM
+  case UTOPIC
+  case WKNOB
+  case WDOOR_ECO
+  case WDOOR_ECO_NB
+  case WGRAVITY
+  case WMOT
+  case WMOT2
+  case WOKU
+  case WOKU_NB
+  case WPORTER
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+open class DeviceConfiguration : Swift.Codable {
+  public init()
+  public init(json: Swift.String)
+  public init(jsonDict: [Swift.String : WDCommon.AnyJSONType])
+  public func toString() -> Swift.String
+  open func copy(newConfiguration: WDCommon.DeviceConfiguration)
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+  open func encode(to encoder: Swift.Encoder) throws
+}
+public protocol ViewModelProtocol : AnyObject {
+  associatedtype Input
+  associatedtype Output
+}
+open class DeviceInfo {
+  public var mac: Swift.String
+  public var assetId: Swift.Int?
+  public var configuration: WDCommon.DeviceConfiguration?
+  public var challengeSecret: Swift.String?
+  public var challengeSecret2: Swift.String?
+  public var productId: Swift.Int
+  public init()
+  public init(mac: Swift.String, assetId: Swift.Int?, configuration: WDCommon.DeviceConfiguration?, challengeSecret: Swift.String?, challengeSecret2: Swift.String?, productId: Swift.Int)
+  @objc deinit
+}
