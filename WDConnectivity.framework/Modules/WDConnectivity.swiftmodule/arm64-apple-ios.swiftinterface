@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)
+// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name WDConnectivity
 import CoreBluetooth.CBCharacteristic
 import CoreBluetooth.CBPeripheral
@@ -66,6 +66,7 @@ public class ConnectivityViewModel : WDCommon.ViewModelProtocol {
     public let writeAdvertising: RxSwift.AnyObserver<Swift.Int>
     public let calibrateAction: RxSwift.AnyObserver<Swift.Void>
     public let readCoverage: RxSwift.AnyObserver<Swift.Void>
+    public let checkToUpdateGPRSModule: RxSwift.AnyObserver<Swift.Bool>
   }
   public struct Output {
     public let onLoadingObservable: RxSwift.Observable<Swift.Bool>
@@ -95,6 +96,7 @@ public class ConnectivityViewModel : WDCommon.ViewModelProtocol {
     public let onCalibrateActionError: RxSwift.Observable<Swift.Error>
     public let onReadCoverageDone: RxSwift.Observable<Swift.Int?>
     public let onReadCoverageError: RxSwift.Observable<Swift.Error>
+    public let onCheckToUpdateGRPSModuleDone: RxSwift.Observable<Swift.Bool>
   }
   public var input: WDConnectivity.ConnectivityViewModel.Input
   public var output: WDConnectivity.ConnectivityViewModel.Output
