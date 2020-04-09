@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name WDNetwork
 import Foundation
 import RxCocoa
@@ -11,13 +11,13 @@ public class TokenService {
   public init()
   @objc deinit
 }
-public class DefaultResponseError : Swift.Decodable {
+@_hasMissingDesignatedInitializers public class DefaultResponseError : Swift.Decodable {
   public var code: Swift.Int?
   public var msg: Swift.String?
   required public init(from decoder: Swift.Decoder) throws
   @objc deinit
 }
-public class Token : WDNetwork.ResponseProtocol, Swift.Decodable {
+@_hasMissingDesignatedInitializers public class Token : WDNetwork.ResponseProtocol, Swift.Decodable {
   public var token_type: Swift.String?
   public var access_token: Swift.String?
   public var expires_in: Swift.Int?
@@ -28,8 +28,8 @@ public class Token : WDNetwork.ResponseProtocol, Swift.Decodable {
   public func getResponseCode() -> Swift.Int
   public func isExpired(expirationDate: Foundation.Date?) -> Swift.Bool
   public func hasValues() -> Swift.Bool
-  required public init(from decoder: Swift.Decoder) throws
   @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
 }
 public protocol ResponseProtocol {
   func getResponseCode() -> Swift.Int
@@ -70,7 +70,7 @@ extension RequestProtocol {
   public func getURLRequest() -> Foundation.URLRequest?
   public func interceptorRequest(urlString: Swift.String) -> Foundation.URLRequest?
 }
-final public class ClientConfiguration {
+@_hasMissingDesignatedInitializers final public class ClientConfiguration {
   public static var BASE_URL: Swift.String
   public static var OAUTH_URL: Swift.String
   public static var OAUTH_BASIC: Swift.Bool

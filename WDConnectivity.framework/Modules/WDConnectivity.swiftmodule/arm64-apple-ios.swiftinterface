@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name WDConnectivity
 import CoreBluetooth.CBCharacteristic
 import CoreBluetooth.CBPeripheral
@@ -18,7 +18,7 @@ public class ConnectionErrorModel {
   public init(error: Swift.Error?, nearPeripheral: CoreBluetooth.CBPeripheral?)
   @objc deinit
 }
-public class WDMot2 : WDConnectivity.WDDevice {
+@_inheritsConvenienceInitializers public class WDMot2 : WDConnectivity.WDDevice {
   override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
   override public func onChallengeEnd(callback: @escaping () -> ())
   override public func setConfiguration(newConfiguration: WDCommon.DeviceConfiguration) -> RxSwift.Observable<Swift.Void>
@@ -27,7 +27,7 @@ public class WDMot2 : WDConnectivity.WDDevice {
 extension CBPeripheral {
   public func check(withMac: Swift.String) -> Swift.Bool
 }
-public class WDKnob : WDConnectivity.BleDevice {
+@_inheritsConvenienceInitializers public class WDKnob : WDConnectivity.BleDevice {
   override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
   override public func initObservers()
   override public func initGattServices(characteristics: [CoreBluetooth.CBCharacteristic]) -> Swift.Bool
@@ -42,7 +42,7 @@ public class WDKnob : WDConnectivity.BleDevice {
   public func calibrate() -> RxSwift.Observable<Swift.Void>
   @objc deinit
 }
-public class WDEco : WDConnectivity.WDDevice {
+@_inheritsConvenienceInitializers public class WDEco : WDConnectivity.WDDevice {
   override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
   override public func onChallengeEnd(callback: @escaping () -> ())
   override public func checkConfiguration(char: Swift.String, callback: @escaping () -> ())
@@ -139,7 +139,7 @@ public enum CHAR : Swift.Int {
     get
   }
 }
-public class WDGravity : WDConnectivity.WDModuleDevice {
+@_inheritsConvenienceInitializers public class WDGravity : WDConnectivity.WDModuleDevice {
   final public let onExtendedDoorStateSubject: RxSwift.PublishSubject<Swift.Int>
   final public let onExtendedDoorStateChangedSubject: RxSwift.PublishSubject<Swift.Int>
   final public let onActionStatusSubject: RxSwift.PublishSubject<Swift.Int>
@@ -194,7 +194,7 @@ open class BleDevice {
   open func enableNotifications()
   @objc deinit
 }
-public class WDModuleDevice : WDConnectivity.WDDevice {
+@_inheritsConvenienceInitializers public class WDModuleDevice : WDConnectivity.WDDevice {
   public static var MODULE_STATUS_NONE: Swift.Int
   public static var MODULE_STATUS_GPRS: Swift.Int
   public static var MODULE_STATUS_NBIOT: Swift.Int
@@ -205,17 +205,17 @@ public class WDModuleDevice : WDConnectivity.WDDevice {
   override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
   @objc deinit
 }
-public class WDMot : WDConnectivity.WDDevice {
+@_inheritsConvenienceInitializers public class WDMot : WDConnectivity.WDDevice {
   override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
   override public func onChallengeEnd(callback: @escaping () -> ())
   override public func setConfiguration(newConfiguration: WDCommon.DeviceConfiguration) -> RxSwift.Observable<Swift.Void>
   @objc deinit
 }
-public class ConnectivityService {
+@_hasMissingDesignatedInitializers public class ConnectivityService {
   public func sendCoverage(productId: Swift.Int, coverage: Swift.Int, onFinish: @escaping (Swift.Error?) -> ())
   @objc deinit
 }
-public class WDDevice : WDConnectivity.BleDevice {
+@_inheritsConvenienceInitializers public class WDDevice : WDConnectivity.BleDevice {
   override public init(deviceInfo: WDCommon.DeviceInfo, client: WDNetwork.Client?)
   override public func initObservers()
   override public func initGattServices(characteristics: [CoreBluetooth.CBCharacteristic]) -> Swift.Bool
@@ -235,6 +235,6 @@ public class WDDevice : WDConnectivity.BleDevice {
   public func performAction(value: Foundation.Data) -> RxSwift.Observable<Swift.Void>
   @objc deinit
 }
-open class Encryption {
+@_hasMissingDesignatedInitializers open class Encryption {
   @objc deinit
 }
