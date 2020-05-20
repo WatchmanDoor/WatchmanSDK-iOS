@@ -18,10 +18,10 @@ workspace 'Example.xcworkspace'
 target 'Example' do
     
     project 'Example.xcodeproj'
-    pod 'RxSwift', '~> 5.0'
-    pod 'RxCocoa', '~> 5.0'
-    pod 'Swinject', '~> 2.0'
-    pod 'SwinjectAutoregistration', '~> 2.0'
+    pod 'RxSwift', '~> 5.1.1'
+    pod 'RxCocoa', '~> 5.1.1'
+    pod 'Swinject', '~> 2.7.1'
+    pod 'SwinjectAutoregistration', '~> 2.7.0'
     
 end
 ```
